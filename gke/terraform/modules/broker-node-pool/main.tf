@@ -5,6 +5,12 @@ resource "google_container_node_pool" "this" {
   max_pods_per_node = var.max_pods_per_node
   node_locations    = var.availability_zones
 
+  lifecycle {
+    ignore_changes = [
+      node_config[0].kubelet_config
+    ]
+  }
+
   node_config {
     machine_type    = var.worker_node_machine_type
     image_type      = "UBUNTU_CONTAINERD" #checkov:skip=CKV_GCP_22:Ubuntu is required for XFS support

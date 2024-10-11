@@ -113,6 +113,12 @@ resource "google_container_node_pool" "system" {
 
   max_pods_per_node = var.max_pods_per_node_system
 
+  lifecycle {
+    ignore_changes = [
+      node_config[0].kubelet_config
+    ]
+  }
+
   node_config {
     machine_type    = local.system_machine_type
     image_type      = "COS_CONTAINERD"
