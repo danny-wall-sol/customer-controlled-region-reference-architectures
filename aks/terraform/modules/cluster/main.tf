@@ -40,7 +40,8 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   dns_prefix              = var.cluster_name
   private_cluster_enabled = var.kubernetes_api_public_access ? false : true
   kubernetes_version      = var.kubernetes_version
-  sku_tier                = "Standard"
+  support_plan = "AKSLongTermSupport"
+  sku_tier                = "Premium"
   local_account_disabled  = var.local_account_disabled
 
   api_server_access_profile {
